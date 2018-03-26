@@ -503,6 +503,9 @@ class RotateBackups(PropertyManager):
         logger.info("Scanning %s for backups ..", location)
         location.ensure_readable()
         for entry in natsort(location.context.list_entries(location.directory)):
+            entry_match = entry
+            if "_" in entry:
+                entry_match = entry.split("_")[1]
             match = TIMESTAMP_PATTERN.search(entry)
             if match:
                 if self.exclude_list and any(fnmatch.fnmatch(entry, p) for p in self.exclude_list):
