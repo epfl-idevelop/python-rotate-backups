@@ -500,7 +500,7 @@ class RotateBackups(PropertyManager):
         """
         backups = []
         location = coerce_location(location)
-        logger.info("Scanning %s for backups ..", location)
+        logger.info("Scanning %s for backups (%s) ..", location, self.include_list)
         location.ensure_readable()
         for entry in natsort(location.context.list_entries(location.directory)):
             entry_match = entry
